@@ -1,0 +1,116 @@
+/* Lexend — fonte de acessibilidade */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
+
+/* ── Design tokens ─────────────────────────────────────────────────────────── */
+:root {
+  /* Cores */
+  --color-primary:     #2563eb;
+  --color-primary-dark:#1d4ed8;
+  --color-accent:      #f59e0b;
+  --color-bg:          #fef9f0;
+  --color-surface:     #ffffff;
+  --color-text:        #1e293b;
+  --color-text-muted:  #64748b;
+  --color-border:      #e2e8f0;
+  --color-eliminated:  #94a3b8;
+  --color-success:     #16a34a;
+  --color-error:       #dc2626;
+
+  /* Tipografia */
+  --font-family:       'Lexend', sans-serif;
+  --font-size-body:    18px;
+  --font-size-button:  24px;
+  --font-size-heading: 32px;
+  --font-size-small:   14px;
+
+  /* Espaçamento */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  40px;
+
+  /* Touch targets */
+  --touch-target: 44px;
+
+  /* Raios */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  /* Sombras */
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.10);
+}
+
+/* ── Alto contraste ────────────────────────────────────────────────────────── */
+[data-theme="high-contrast"] {
+  --color-bg:         #000000;
+  --color-surface:    #111111;
+  --color-text:       #ffffff;
+  --color-text-muted: #cccccc;
+  --color-primary:    #ffff00;
+  --color-accent:     #00ffff;
+  --color-border:     #ffffff;
+  --color-success:    #00ff00;
+  --color-error:      #ff4444;
+}
+
+/* ── Reset ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--font-size-body);
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  line-height: 1.5;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: var(--font-family);
+  font-size: var(--font-size-button);
+  cursor: pointer;
+  border: none;
+  background: none;
+  min-height: var(--touch-target);
+  min-width: var(--touch-target);
+}
+
+/* ── Foco visível (acessibilidade) ─────────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Utilitários ───────────────────────────────────────────────────────────── */
+.touch-target {
+  min-height: var(--touch-target);
+  min-width: var(--touch-target);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
