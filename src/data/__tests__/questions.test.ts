@@ -1,15 +1,14 @@
 import { describe, it, expect } from 'vitest'
 import { phase1Questions } from '../questions'
 
-// Personagens da Fase 1
-const PHASE1_CHARACTER_IDS = ['aie', 'kojo', 'zumbi', 'amara'] as const
+const PHASE1_CHARACTER_IDS = ['aie', 'yara', 'caua', 'taina', 'iara', 'potira'] as const
 
 describe('Phase 1 Question Bank — integridade dos dados', () => {
   it('deve ter pelo menos 8 perguntas', () => {
     expect(phase1Questions.length).toBeGreaterThanOrEqual(8)
   })
 
-  it('cada pergunta deve ter answers definidos para todos os 4 personagens da Fase 1', () => {
+  it('cada pergunta deve ter answers definidos para todos os 6 personagens da Fase 1', () => {
     for (const question of phase1Questions) {
       for (const characterId of PHASE1_CHARACTER_IDS) {
         expect(
@@ -35,26 +34,37 @@ describe('Phase 1 Question Bank — integridade dos dados', () => {
     }
   })
 
-  it('kojo (Iorubá) deve ter respostas bem definidas em todas as perguntas', () => {
+  it('yara (Guarani) deve ter respostas bem definidas em todas as perguntas', () => {
     for (const question of phase1Questions) {
-      expect(question.answers['kojo']).not.toBeUndefined()
+      expect(question.answers['yara']).not.toBeUndefined()
     }
   })
 
-  it('zumbi (quilombola) deve ter respostas bem definidas em todas as perguntas', () => {
+  it('cauã (Xavante) deve ter respostas bem definidas em todas as perguntas', () => {
     for (const question of phase1Questions) {
-      expect(question.answers['zumbi']).not.toBeUndefined()
+      expect(question.answers['caua']).not.toBeUndefined()
     }
   })
 
-  it('amara (Angola/Moçambique) deve ter respostas bem definidas em todas as perguntas', () => {
+  it('tainá (Kayapó) deve ter respostas bem definidas em todas as perguntas', () => {
     for (const question of phase1Questions) {
-      expect(question.answers['amara']).not.toBeUndefined()
+      expect(question.answers['taina']).not.toBeUndefined()
+    }
+  })
+
+  it('iara (Yanomami) deve ter respostas bem definidas em todas as perguntas', () => {
+    for (const question of phase1Questions) {
+      expect(question.answers['iara']).not.toBeUndefined()
+    }
+  })
+
+  it('potira (Pataxó) deve ter respostas bem definidas em todas as perguntas', () => {
+    for (const question of phase1Questions) {
+      expect(question.answers['potira']).not.toBeUndefined()
     }
   })
 
   it('as perguntas devem cobrir pelo menos 3 atributos distintos (verificado por diversidade de respostas)', () => {
-    // Verifica que não todas as perguntas têm o mesmo padrão de respostas
     const patterns = new Set(
       phase1Questions.map(q =>
         PHASE1_CHARACTER_IDS.map(id => q.answers[id]).join(','),
@@ -75,22 +85,45 @@ describe('Phase 1 Question Bank — integridade dos dados', () => {
     }
   })
 
-  // Verificações específicas de valores conhecidos (matriz de perguntas)
-  it('kojo deve usar turbante (q-turbante: true)', () => {
-    const q = phase1Questions.find(q => q.id === 'q-turbante')
-    expect(q).toBeDefined()
-    expect(q!.answers['kojo']).toBe(true)
-  })
-
   it('aiê deve usar cocar (q-cocar: true)', () => {
     const q = phase1Questions.find(q => q.id === 'q-cocar')
     expect(q).toBeDefined()
     expect(q!.answers['aie']).toBe(true)
   })
 
-  it('zumbi deve ter feijão na comida (q-feijao: true)', () => {
-    const q = phase1Questions.find(q => q.id === 'q-feijao')
+  it('aiê deve ser pescador (q-pescador: true)', () => {
+    const q = phase1Questions.find(q => q.id === 'q-pescador')
     expect(q).toBeDefined()
-    expect(q!.answers['zumbi']).toBe(true)
+    expect(q!.answers['aie']).toBe(true)
+  })
+
+  it('tainá deve usar adorno no lábio (q-labrete: true)', () => {
+    const q = phase1Questions.find(q => q.id === 'q-labrete')
+    expect(q).toBeDefined()
+    expect(q!.answers['taina']).toBe(true)
+  })
+
+  it('yara deve tocar flauta (q-flauta: true)', () => {
+    const q = phase1Questions.find(q => q.id === 'q-flauta')
+    expect(q).toBeDefined()
+    expect(q!.answers['yara']).toBe(true)
+  })
+
+  it('cauã deve ser caçador (q-cacador: true)', () => {
+    const q = phase1Questions.find(q => q.id === 'q-cacador')
+    expect(q).toBeDefined()
+    expect(q!.answers['caua']).toBe(true)
+  })
+
+  it('iara deve tecer cestos (q-cesto: true)', () => {
+    const q = phase1Questions.find(q => q.id === 'q-cesto')
+    expect(q).toBeDefined()
+    expect(q!.answers['iara']).toBe(true)
+  })
+
+  it('potira deve fazer colares de miçangas (q-micanga: true)', () => {
+    const q = phase1Questions.find(q => q.id === 'q-micanga')
+    expect(q).toBeDefined()
+    expect(q!.answers['potira']).toBe(true)
   })
 })

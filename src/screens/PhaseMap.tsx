@@ -4,10 +4,11 @@ import { useGame } from '@/context/GameContext'
 // ── Phase data ────────────────────────────────────────────────────────────────
 
 const PHASES = [
-  { phase: 1, title: 'Fase 1', subtitle: 'Origens — Brasil Indígena e Africano' },
-  { phase: 2, title: 'Fase 2', subtitle: 'Encontros — Missões e Quilombos' },
-  { phase: 3, title: 'Fase 3', subtitle: 'Culturas — Saberes e Tradições' },
-  { phase: 4, title: 'Fase 4', subtitle: 'Legados — Hoje e Sempre' },
+  { phase: 1, title: 'Fase 1', subtitle: 'Raízes — Povos Originários' },
+  { phase: 2, title: 'Fase 2', subtitle: 'Encontros — África e Portugal' },
+  { phase: 3, title: 'Fase 3', subtitle: 'Imigração — Europa' },
+  { phase: 4, title: 'Fase 4', subtitle: 'Novos Horizontes — Ásia e Oriente Médio' },
+  { phase: 5, title: 'Fase 5 ⭐', subtitle: 'Brasil de Todos — Extra' },
 ]
 
 // ── PhaseMap ──────────────────────────────────────────────────────────────────

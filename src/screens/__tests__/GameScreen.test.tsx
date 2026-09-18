@@ -37,9 +37,11 @@ function makeDefaultState() {
     secretCharacterId: 'aie',
     cardStates: {
       aie: 'active' as const,
-      kojo: 'active' as const,
-      zumbi: 'active' as const,
-      amara: 'active' as const,
+      yara: 'active' as const,
+      caua: 'active' as const,
+      taina: 'active' as const,
+      iara: 'active' as const,
+      potira: 'active' as const,
     },
     askedQuestionIds: [] as string[],
     lastAnswer: null as boolean | null,
@@ -101,17 +103,17 @@ describe('GameScreen', () => {
     )
   })
 
-  it('renders 4 character cards', () => {
+  it('renders 6 character cards', () => {
     renderGameScreen()
-    const cards = screen.getAllByRole('button', { name: /aiê|kojo|zumbi|amara/i })
-    expect(cards).toHaveLength(4)
+    const cards = screen.getAllByRole('button', { name: /aiê|yara|cauã|tainá|iara|potira/i })
+    expect(cards).toHaveLength(6)
   })
 
   it('renders at least 8 question buttons', () => {
     renderGameScreen()
     const allButtons = screen.getAllByRole('button')
-    // 4 character cards + 8 question buttons = 12+ buttons
-    expect(allButtons.length).toBeGreaterThanOrEqual(12)
+    // 6 character cards + 8 question buttons = 14+ buttons
+    expect(allButtons.length).toBeGreaterThanOrEqual(14)
   })
 
   it('tapping a question button dispatches ASK_QUESTION', async () => {
@@ -151,9 +153,11 @@ describe('GameScreen', () => {
       ...mockGameState,
       cardStates: {
         aie: 'active',
-        kojo: 'eliminated',
-        zumbi: 'eliminated',
-        amara: 'eliminated',
+        yara: 'eliminated',
+        caua: 'eliminated',
+        taina: 'eliminated',
+        iara: 'eliminated',
+        potira: 'eliminated',
       },
     }
 

@@ -2,35 +2,27 @@ import type { Question } from '@/types'
 
 // ── Phase 1 Question Bank ─────────────────────────────────────────────────────
 //
-// Personagens da Fase 1: aie (Tupi), kojo (Iorubá), zumbi (quilombola), amara (Angola/Moçambique)
+// Personagens da Fase 1: aie (Tupi), yara (Guarani), caua (Xavante),
+//                        taina (Kayapó), iara (Yanomami), potira (Pataxó)
 //
 // Matriz de respostas (true = sim, false = não):
 //
-// Pergunta                            | aie   | kojo  | zumbi | amara
-// ------------------------------------|-------|-------|-------|------
-// Usa turbante?                       | false | true  | false | false
-// Usa cocar?                          | true  | false | false | false
-// Tem instrumento de percussão?       | false | true  | true  | false
-// A comida é frita?                   | false | true  | false | false
-// Usa roupas coloridas?               | true  | true  | false | true
-// Trabalha com artesanato ou tecido?  | false | true  | false | true
-// Tem arco?                           | true  | false | false | false
-// A comida vem de feijão?             | false | false | true  | false
+// Pergunta                         | aie | yara | caua | taina | iara | potira
+// ---------------------------------|-----|------|------|-------|------|-------
+// Usa cocar?                       |  T  |  F   |  T   |   F   |  F   |   F
+// É pescador/pescadora?            |  T  |  F   |  F   |   F   |  F   |   F
+// Usa arco e flecha?               |  T  |  F   |  T   |   F   |  F   |   F
+// Usa roupas coloridas?            |  T  |  T   |  F   |   F   |  F   |   T
+// Trabalha com artesanato?         |  F  |  T   |  F   |   F   |  T   |   T
+// Toca flauta?                     |  F  |  T   |  F   |   F   |  F   |   F
+// É curandeiro/curandeira?         |  F  |  T   |  F   |   F   |  T   |   F
+// É caçador/caçadora?              |  F  |  F   |  T   |   F   |  F   |   F
+// Usa adorno no lábio?             |  F  |  F   |  F   |   T   |  F   |   F
+// Toca maracá?                     |  F  |  F   |  F   |   T   |  F   |   F
+// Tece cestos?                     |  F  |  F   |  F   |   F   |  T   |   F
+// Faz colares de miçangas?         |  F  |  T   |  F   |   F   |  F   |   T
 
 export const phase1Questions: Question[] = [
-  {
-    id: 'q-turbante',
-    text: 'Essa pessoa usa turbante?',
-    audioPath: 'assets/audio/questions/q-turbante.mp3',
-    iconEmoji: '🎩',
-    phaseIds: [1],
-    answers: {
-      aie: false,
-      kojo: true,
-      zumbi: false,
-      amara: false,
-    },
-  },
   {
     id: 'q-cocar',
     text: 'Essa pessoa usa cocar?',
@@ -39,35 +31,41 @@ export const phase1Questions: Question[] = [
     phaseIds: [1],
     answers: {
       aie: true,
-      kojo: false,
-      zumbi: false,
-      amara: false,
+      yara: false,
+      caua: true,
+      taina: false,
+      iara: false,
+      potira: false,
     },
   },
   {
-    id: 'q-percussao',
-    text: 'Essa pessoa tem um instrumento de percussão?',
-    audioPath: 'assets/audio/questions/q-percussao.mp3',
-    iconEmoji: '🥁',
+    id: 'q-pescador',
+    text: 'Essa pessoa é pescadora ou pescador?',
+    audioPath: 'assets/audio/questions/q-pescador.mp3',
+    iconEmoji: '🎣',
     phaseIds: [1],
     answers: {
-      aie: false,
-      kojo: true,
-      zumbi: true,
-      amara: false,
+      aie: true,
+      yara: false,
+      caua: false,
+      taina: false,
+      iara: false,
+      potira: false,
     },
   },
   {
-    id: 'q-comida-frita',
-    text: 'A comida dessa pessoa é frita?',
-    audioPath: 'assets/audio/questions/q-comida-frita.mp3',
-    iconEmoji: '🍳',
+    id: 'q-arco',
+    text: 'Essa pessoa usa arco e flecha?',
+    audioPath: 'assets/audio/questions/q-arco.mp3',
+    iconEmoji: '🏹',
     phaseIds: [1],
     answers: {
-      aie: false,
-      kojo: true,
-      zumbi: false,
-      amara: false,
+      aie: true,
+      yara: false,
+      caua: true,
+      taina: false,
+      iara: false,
+      potira: false,
     },
   },
   {
@@ -78,48 +76,131 @@ export const phase1Questions: Question[] = [
     phaseIds: [1],
     answers: {
       aie: true,
-      kojo: true,
-      zumbi: false,
-      amara: true,
+      yara: true,
+      caua: false,
+      taina: false,
+      iara: false,
+      potira: true,
     },
   },
   {
     id: 'q-artesanato',
-    text: 'Essa pessoa trabalha com artesanato ou tecido?',
+    text: 'Essa pessoa trabalha com artesanato?',
     audioPath: 'assets/audio/questions/q-artesanato.mp3',
     iconEmoji: '🧵',
     phaseIds: [1],
     answers: {
       aie: false,
-      kojo: true,
-      zumbi: false,
-      amara: true,
+      yara: true,
+      caua: false,
+      taina: false,
+      iara: true,
+      potira: true,
     },
   },
   {
-    id: 'q-arco',
-    text: 'Essa pessoa tem um arco?',
-    audioPath: 'assets/audio/questions/q-arco.mp3',
-    iconEmoji: '🏹',
-    phaseIds: [1],
-    answers: {
-      aie: true,
-      kojo: false,
-      zumbi: false,
-      amara: false,
-    },
-  },
-  {
-    id: 'q-feijao',
-    text: 'A comida dessa pessoa vem de feijão?',
-    audioPath: 'assets/audio/questions/q-feijao.mp3',
-    iconEmoji: '🫘',
+    id: 'q-flauta',
+    text: 'Essa pessoa toca flauta?',
+    audioPath: 'assets/audio/questions/q-flauta.mp3',
+    iconEmoji: '🎵',
     phaseIds: [1],
     answers: {
       aie: false,
-      kojo: false,
-      zumbi: true,
-      amara: false,
+      yara: true,
+      caua: false,
+      taina: false,
+      iara: false,
+      potira: false,
+    },
+  },
+  {
+    id: 'q-curandeiro',
+    text: 'Essa pessoa é curandeira ou curandeiro?',
+    audioPath: 'assets/audio/questions/q-curandeiro.mp3',
+    iconEmoji: '🌿',
+    phaseIds: [1],
+    answers: {
+      aie: false,
+      yara: true,
+      caua: false,
+      taina: false,
+      iara: true,
+      potira: false,
+    },
+  },
+  {
+    id: 'q-cacador',
+    text: 'Essa pessoa é caçadora ou caçador?',
+    audioPath: 'assets/audio/questions/q-cacador.mp3',
+    iconEmoji: '🦌',
+    phaseIds: [1],
+    answers: {
+      aie: false,
+      yara: false,
+      caua: true,
+      taina: false,
+      iara: false,
+      potira: false,
+    },
+  },
+  {
+    id: 'q-labrete',
+    text: 'Essa pessoa usa adorno no lábio?',
+    audioPath: 'assets/audio/questions/q-labrete.mp3',
+    iconEmoji: '💎',
+    phaseIds: [1],
+    answers: {
+      aie: false,
+      yara: false,
+      caua: false,
+      taina: true,
+      iara: false,
+      potira: false,
+    },
+  },
+  {
+    id: 'q-maraca',
+    text: 'Essa pessoa toca maracá?',
+    audioPath: 'assets/audio/questions/q-maraca.mp3',
+    iconEmoji: '🪇',
+    phaseIds: [1],
+    answers: {
+      aie: false,
+      yara: false,
+      caua: false,
+      taina: true,
+      iara: false,
+      potira: false,
+    },
+  },
+  {
+    id: 'q-cesto',
+    text: 'Essa pessoa tece cestos?',
+    audioPath: 'assets/audio/questions/q-cesto.mp3',
+    iconEmoji: '🧺',
+    phaseIds: [1],
+    answers: {
+      aie: false,
+      yara: false,
+      caua: false,
+      taina: false,
+      iara: true,
+      potira: false,
+    },
+  },
+  {
+    id: 'q-micanga',
+    text: 'Essa pessoa faz colares de miçangas?',
+    audioPath: 'assets/audio/questions/q-micanga.mp3',
+    iconEmoji: '📿',
+    phaseIds: [1],
+    answers: {
+      aie: false,
+      yara: true,
+      caua: false,
+      taina: false,
+      iara: false,
+      potira: true,
     },
   },
 ]

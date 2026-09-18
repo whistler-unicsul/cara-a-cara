@@ -28,12 +28,14 @@ let mockMyRole: 'host' | 'guest' | null = 'host'
 let mockIsMyTurn = true
 let mockMyCardStates: Record<string, 'active' | 'eliminated'> = {
   aie: 'active',
-  kojo: 'active',
-  zumbi: 'active',
-  amara: 'active',
+  yara: 'active',
+  caua: 'active',
+  taina: 'active',
+  iara: 'active',
+  potira: 'active',
 }
 let mockMyAskedQuestionIds: string[] = []
-let mockOpponentSecretCharId: string | null = 'kojo'
+let mockOpponentSecretCharId: string | null = 'yara'
 let mockError: string | null = null
 
 vi.mock('@/context/MultiplayerContext', () => ({
@@ -86,10 +88,10 @@ function makeRoom(overrides: Partial<MultiplayerRoom> = {}): MultiplayerRoom {
     host_session_id: 'host-session-id',
     guest_session_id: 'guest-session-id',
     host_secret_char_id: 'aie',
-    guest_secret_char_id: 'kojo',
+    guest_secret_char_id: 'yara',
     current_turn: 'host',
-    host_card_states: { aie: 'active', kojo: 'active', zumbi: 'active', amara: 'active' },
-    guest_card_states: { aie: 'active', kojo: 'active', zumbi: 'active', amara: 'active' },
+    host_card_states: { aie: 'active', yara: 'active', caua: 'active', taina: 'active', iara: 'active', potira: 'active' },
+    guest_card_states: { aie: 'active', yara: 'active', caua: 'active', taina: 'active', iara: 'active', potira: 'active' },
     host_asked_q_ids: [],
     guest_asked_q_ids: [],
     last_question_id: null,
@@ -129,14 +131,14 @@ describe('MultiplayerGameScreen', () => {
     resetState()
   })
 
-  it('renderiza 4 cartas e ≥ 8 perguntas', () => {
+  it('renderiza 6 cartas e ≥ 8 perguntas', () => {
     renderGameScreen()
 
-    const cards = screen.getAllByRole('button', { name: /aiê|kojo|zumbi|amara/i })
-    expect(cards).toHaveLength(4)
+    const cards = screen.getAllByRole('button', { name: /aiê|yara|cauã|tainá|iara|potira/i })
+    expect(cards).toHaveLength(6)
 
     const allButtons = screen.getAllByRole('button')
-    expect(allButtons.length).toBeGreaterThanOrEqual(12) // 4 cards + 8 questions
+    expect(allButtons.length).toBeGreaterThanOrEqual(14) // 6 cards + 8 questions
   })
 
   it('isMyTurn=true → controles habilitados (perguntas não estão todas desabilitadas)', () => {
@@ -180,9 +182,11 @@ describe('MultiplayerGameScreen', () => {
   it('com 1 carta ativa → "Adivinhar!" visível', () => {
     mockMyCardStates = {
       aie: 'active',
-      kojo: 'eliminated',
-      zumbi: 'eliminated',
-      amara: 'eliminated',
+      yara: 'eliminated',
+      caua: 'eliminated',
+      taina: 'eliminated',
+      iara: 'eliminated',
+      potira: 'eliminated',
     }
     renderGameScreen()
 
@@ -209,7 +213,7 @@ describe('MultiplayerGameScreen', () => {
     vi.useFakeTimers()
     mockRoom = makeRoom({ status: 'finished', winner: 'host' })
     mockMyRole = 'host'
-    mockOpponentSecretCharId = 'kojo'
+    mockOpponentSecretCharId = 'yara'
     renderGameScreen()
 
     act(() => {
@@ -218,8 +222,8 @@ describe('MultiplayerGameScreen', () => {
 
     // After celebration, educational card should show opponent's character
     expect(screen.getByTestId('educational-card')).toBeInTheDocument()
-    // Kojo's name should be visible
-    expect(screen.getByRole('heading', { name: 'Kojo' })).toBeInTheDocument()
+    // Yara's name should be visible
+    expect(screen.getByRole('heading', { name: 'Yara' })).toBeInTheDocument()
 
     vi.useRealTimers()
   })
@@ -274,7 +278,7 @@ describe('MultiplayerGameScreen', () => {
 
     mockRoom = makeRoom({ status: 'finished', winner: 'host' })
     mockMyRole = 'host'
-    mockOpponentSecretCharId = 'kojo'
+    mockOpponentSecretCharId = 'yara'
     renderGameScreen()
 
     act(() => { vi.advanceTimersByTime(2500) })

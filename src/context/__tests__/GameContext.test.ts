@@ -57,9 +57,11 @@ function makePlayingState(secretCharacterId: string): GameState {
     secretCharacterId,
     cardStates: {
       aie: 'active',
-      kojo: 'active',
-      zumbi: 'active',
-      amara: 'active',
+      yara: 'active',
+      caua: 'active',
+      taina: 'active',
+      iara: 'active',
+      potira: 'active',
     },
     askedQuestionIds: [],
     lastAnswer: null,
@@ -71,8 +73,8 @@ function makePlayingState(secretCharacterId: string): GameState {
 describe('GameReducer', () => {
   // START_GAME
   describe('START_GAME', () => {
-    it('selects one of the 4 Phase 1 characters as secretCharacterId', () => {
-      const validIds = ['aie', 'kojo', 'zumbi', 'amara']
+    it('selects one of the 6 Phase 1 characters as secretCharacterId', () => {
+      const validIds = ['aie', 'yara', 'caua', 'taina', 'iara', 'potira']
       const results = new Set<string>()
 
       // Run multiple times to check randomness coverage
@@ -82,17 +84,19 @@ describe('GameReducer', () => {
         expect(validIds).toContain(next.secretCharacterId)
         results.add(next.secretCharacterId!)
       }
-      // With 50 runs and 4 characters, all 4 should appear
+      // With 50 runs and 6 characters, more than 1 should appear
       expect(results.size).toBeGreaterThan(1)
     })
 
-    it('initializes cardStates with all 4 Phase 1 characters as active', () => {
+    it('initializes cardStates with all 6 Phase 1 characters as active', () => {
       const next = GameReducer(initialState, { type: 'START_GAME', phase: 1 })
       expect(next.cardStates).toEqual({
         aie: 'active',
-        kojo: 'active',
-        zumbi: 'active',
-        amara: 'active',
+        yara: 'active',
+        caua: 'active',
+        taina: 'active',
+        iara: 'active',
+        potira: 'active',
       })
     })
 
@@ -125,14 +129,14 @@ describe('GameReducer', () => {
   // TOGGLE_CARD
   describe('TOGGLE_CARD', () => {
     it('toggles active → eliminated', () => {
-      const state = makePlayingState('kojo')
+      const state = makePlayingState('caua')
       const next = GameReducer(state, { type: 'TOGGLE_CARD', characterId: 'aie' })
       expect(next.cardStates['aie']).toBe('eliminated')
     })
 
     it('toggles eliminated → active', () => {
       const state: GameState = {
-        ...makePlayingState('kojo'),
+        ...makePlayingState('caua'),
         cardStates: {
           aie: 'eliminated',
           kojo: 'active',
@@ -145,72 +149,76 @@ describe('GameReducer', () => {
     })
 
     it('does not change other card states', () => {
-      const state = makePlayingState('kojo')
+      const state = makePlayingState('caua')
       const next = GameReducer(state, { type: 'TOGGLE_CARD', characterId: 'aie' })
-      expect(next.cardStates['kojo']).toBe('active')
-      expect(next.cardStates['zumbi']).toBe('active')
-      expect(next.cardStates['amara']).toBe('active')
+      expect(next.cardStates['yara']).toBe('active')
+      expect(next.cardStates['caua']).toBe('active')
+      expect(next.cardStates['potira']).toBe('active')
     })
   })
 
   // ASK_QUESTION
   describe('ASK_QUESTION', () => {
     it('adds questionId to askedQuestionIds', () => {
-      const state = makePlayingState('kojo')
-      const next = GameReducer(state, { type: 'ASK_QUESTION', questionId: 'q-turbante' })
-      expect(next.askedQuestionIds).toContain('q-turbante')
+      const state = makePlayingState('aie')
+      const next = GameReducer(state, { type: 'ASK_QUESTION', questionId: 'q-cocar' })
+      expect(next.askedQuestionIds).toContain('q-cocar')
     })
 
-    it('calculates lastAnswer = true when secret character has the attribute (kojo uses turbante)', () => {
-      const state = makePlayingState('kojo')
-      const next = GameReducer(state, { type: 'ASK_QUESTION', questionId: 'q-turbante' })
+    it('calculates lastAnswer = true when secret character has the attribute (aie usa cocar)', () => {
+      const state = makePlayingState('aie')
+      const next = GameReducer(state, { type: 'ASK_QUESTION', questionId: 'q-cocar' })
       expect(next.lastAnswer).toBe(true)
     })
 
-    it('calculates lastAnswer = false when secret character does not have attribute (aie does not use turbante)', () => {
-      const state = makePlayingState('aie')
-      const next = GameReducer(state, { type: 'ASK_QUESTION', questionId: 'q-turbante' })
+    it('calculates lastAnswer = false when secret character does not have attribute (yara nao usa cocar)', () => {
+      const state = makePlayingState('yara')
+      const next = GameReducer(state, { type: 'ASK_QUESTION', questionId: 'q-cocar' })
       expect(next.lastAnswer).toBe(false)
     })
 
     it('accumulates multiple questions in askedQuestionIds', () => {
-      const state = makePlayingState('zumbi')
-      const s1 = GameReducer(state, { type: 'ASK_QUESTION', questionId: 'q-turbante' })
-      const s2 = GameReducer(s1, { type: 'ASK_QUESTION', questionId: 'q-cocar' })
-      expect(s2.askedQuestionIds).toEqual(['q-turbante', 'q-cocar'])
+      const state = makePlayingState('iara')
+      const s1 = GameReducer(state, { type: 'ASK_QUESTION', questionId: 'q-cocar' })
+      const s2 = GameReducer(s1, { type: 'ASK_QUESTION', questionId: 'q-pescador' })
+      expect(s2.askedQuestionIds).toEqual(['q-cocar', 'q-pescador'])
     })
   })
 
   // MAKE_GUESS
   describe('MAKE_GUESS', () => {
     it('correct guess (characterId === secretCharacterId) → screen WIN', () => {
-      const state = makePlayingState('kojo')
-      const next = GameReducer(state, { type: 'MAKE_GUESS', characterId: 'kojo' })
+      const state = makePlayingState('yara')
+      const next = GameReducer(state, { type: 'MAKE_GUESS', characterId: 'yara' })
       expect(next.screen).toBe('WIN')
     })
 
     it('wrong guess (characterId !== secretCharacterId) → screen stays PLAYING', () => {
-      const state = makePlayingState('kojo')
+      const state = makePlayingState('yara')
       const next = GameReducer(state, { type: 'MAKE_GUESS', characterId: 'aie' })
       expect(next.screen).toBe('PLAYING')
     })
 
     it('wrong guess → restores all cardStates to active', () => {
       const state: GameState = {
-        ...makePlayingState('kojo'),
+        ...makePlayingState('yara'),
         cardStates: {
           aie: 'eliminated',
-          kojo: 'active',
-          zumbi: 'eliminated',
-          amara: 'active',
+          yara: 'active',
+          caua: 'eliminated',
+          taina: 'active',
+          iara: 'eliminated',
+          potira: 'active',
         },
       }
       const next = GameReducer(state, { type: 'MAKE_GUESS', characterId: 'aie' })
       expect(next.cardStates).toEqual({
         aie: 'active',
-        kojo: 'active',
-        zumbi: 'active',
-        amara: 'active',
+        yara: 'active',
+        caua: 'active',
+        taina: 'active',
+        iara: 'active',
+        potira: 'active',
       })
     })
   })
@@ -219,25 +227,29 @@ describe('GameReducer', () => {
   describe('WRONG_GUESS', () => {
     it('restores all cardStates to active', () => {
       const state: GameState = {
-        ...makePlayingState('kojo'),
+        ...makePlayingState('yara'),
         cardStates: {
           aie: 'eliminated',
-          kojo: 'active',
-          zumbi: 'eliminated',
-          amara: 'eliminated',
+          yara: 'active',
+          caua: 'eliminated',
+          taina: 'eliminated',
+          iara: 'eliminated',
+          potira: 'active',
         },
       }
       const next = GameReducer(state, { type: 'WRONG_GUESS' })
       expect(next.cardStates).toEqual({
         aie: 'active',
-        kojo: 'active',
-        zumbi: 'active',
-        amara: 'active',
+        yara: 'active',
+        caua: 'active',
+        taina: 'active',
+        iara: 'active',
+        potira: 'active',
       })
     })
 
     it('does NOT change the screen (stays PLAYING)', () => {
-      const state = makePlayingState('zumbi')
+      const state = makePlayingState('iara')
       const next = GameReducer(state, { type: 'WRONG_GUESS' })
       expect(next.screen).toBe('PLAYING')
     })
@@ -245,14 +257,14 @@ describe('GameReducer', () => {
     it('keeps askedQuestionIds (does not clear them)', () => {
       const state: GameState = {
         ...makePlayingState('aie'),
-        askedQuestionIds: ['q-turbante', 'q-cocar'],
+        askedQuestionIds: ['q-cocar', 'q-pescador'],
       }
       const next = GameReducer(state, { type: 'WRONG_GUESS' })
-      expect(next.askedQuestionIds).toEqual(['q-turbante', 'q-cocar'])
+      expect(next.askedQuestionIds).toEqual(['q-cocar', 'q-pescador'])
     })
 
     it('sets encouragement to the correct message (CAC-17)', () => {
-      const state = makePlayingState('kojo')
+      const state = makePlayingState('caua')
       const next = GameReducer(state, { type: 'WRONG_GUESS' })
       expect(next.encouragement).toBe('Quase lá! Vamos tentar outra pergunta')
     })
@@ -261,17 +273,17 @@ describe('GameReducer', () => {
   // MAKE_GUESS encouragement (CAC-17)
   describe('MAKE_GUESS encouragement', () => {
     it('wrong guess sets encouragement message', () => {
-      const state = makePlayingState('kojo')
+      const state = makePlayingState('caua')
       const next = GameReducer(state, { type: 'MAKE_GUESS', characterId: 'aie' })
       expect(next.encouragement).toBe('Quase lá! Vamos tentar outra pergunta')
     })
 
     it('correct guess clears encouragement', () => {
       const state: GameState = {
-        ...makePlayingState('kojo'),
+        ...makePlayingState('caua'),
         encouragement: 'Quase lá! Vamos tentar outra pergunta',
       }
-      const next = GameReducer(state, { type: 'MAKE_GUESS', characterId: 'kojo' })
+      const next = GameReducer(state, { type: 'MAKE_GUESS', characterId: 'caua' })
       expect(next.encouragement).toBeNull()
     })
   })

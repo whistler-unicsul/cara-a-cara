@@ -204,7 +204,7 @@ describe('startGame', () => {
     expect(capturedUpdate!.host_secret_char_id).toBeTruthy()
     expect(capturedUpdate!.guest_secret_char_id).toBeTruthy()
     expect(capturedUpdate!.host_secret_char_id).not.toBe(capturedUpdate!.guest_secret_char_id)
-    const validIds = ['aie', 'kojo', 'zumbi', 'amara']
+    const validIds = ['aie', 'yara', 'caua', 'taina', 'iara', 'potira']
     expect(validIds).toContain(capturedUpdate!.host_secret_char_id)
     expect(validIds).toContain(capturedUpdate!.guest_secret_char_id)
   })

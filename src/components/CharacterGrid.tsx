@@ -20,7 +20,7 @@ export default function CharacterGrid({
 
   const gridStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',
+    gridTemplateColumns: 'repeat(3, 1fr)',
     gap: 'var(--space-md)',
     padding: 'var(--space-md)',
   }
