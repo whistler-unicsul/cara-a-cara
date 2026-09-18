@@ -59,6 +59,7 @@ function makeRoom(overrides: Partial<MultiplayerRoom> = {}): MultiplayerRoom {
     guest_asked_q_ids: [],
     last_question_id: null,
     last_answer: null,
+    last_action: null,
     status: 'waiting',
     winner: null,
     created_at: '2026-01-01T00:00:00Z',
