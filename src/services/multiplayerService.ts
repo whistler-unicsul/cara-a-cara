@@ -1,13 +1,9 @@
-import { createClient } from '@supabase/supabase-js'
 import type { MultiplayerRoom, PlayerRole } from '@/types'
 import { characters } from '@/data/characters'
+import { supabase } from '@/services/supabaseService'
 
-// ── Client ────────────────────────────────────────────────────────────────────
-
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// Cliente Supabase compartilhado com supabaseService (evita 2 instâncias)
+export { supabase }
 
 // ── Timeout helper ────────────────────────────────────────────────────────────
 
@@ -134,7 +130,12 @@ export async function startGame(roomId: string): Promise<void> {
   const phase1Chars = characters.filter(c => c.phase === 1)
 
   // Pick two distinct characters
-  const shuffled = [...phase1Chars].sort(() => Math.random() - 0.5)
+  // Fisher-Yates (sort com Math.random é enviesado)
+  const shuffled = [...phase1Chars]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
   const hostChar = shuffled[0]
   const guestChar = shuffled[1]
 

@@ -3,8 +3,12 @@ import type { GameProgress } from '@/types'
 
 // ── Client ────────────────────────────────────────────────────────────────────
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string
+// Sem .env.local o createClient lança erro no import e a tela fica em branco.
+// Com valores placeholder o app abre e o progresso cai no fallback localStorage.
+const supabaseUrl =
+  (import.meta.env.VITE_SUPABASE_URL as string | undefined) || 'http://localhost:54321'
+const supabaseAnonKey =
+  (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined) || 'missing-anon-key'
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 

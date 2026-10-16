@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 import { AudioProvider } from '@/context/AudioContext'
 import { GameProvider } from '@/context/GameContext'
 import { MultiplayerProvider } from '@/context/MultiplayerContext'
@@ -9,6 +9,15 @@ import GameScreen from '@/screens/GameScreen'
 import MultiplayerLobbyScreen from '@/screens/MultiplayerLobbyScreen'
 import MultiplayerWaitingScreen from '@/screens/MultiplayerWaitingScreen'
 import MultiplayerGameScreen from '@/screens/MultiplayerGameScreen'
+
+// Um único MultiplayerProvider para as 3 telas: evita perder a sala ao navegar
+function MultiplayerLayout() {
+  return (
+    <MultiplayerProvider>
+      <Outlet />
+    </MultiplayerProvider>
+  )
+}
 
 // ── App ───────────────────────────────────────────────────────────────────────
 
@@ -22,9 +31,11 @@ export default function App() {
             <Route path="/avatar" element={<AvatarSelection />} />
             <Route path="/phases" element={<PhaseMap />} />
             <Route path="/game/:phase" element={<GameScreen />} />
-            <Route path="/multiplayer" element={<MultiplayerProvider><MultiplayerLobbyScreen /></MultiplayerProvider>} />
-            <Route path="/multiplayer/waiting" element={<MultiplayerProvider><MultiplayerWaitingScreen /></MultiplayerProvider>} />
-            <Route path="/multiplayer/game" element={<MultiplayerProvider><MultiplayerGameScreen /></MultiplayerProvider>} />
+            <Route element={<MultiplayerLayout />}>
+              <Route path="/multiplayer" element={<MultiplayerLobbyScreen />} />
+              <Route path="/multiplayer/waiting" element={<MultiplayerWaitingScreen />} />
+              <Route path="/multiplayer/game" element={<MultiplayerGameScreen />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </GameProvider>

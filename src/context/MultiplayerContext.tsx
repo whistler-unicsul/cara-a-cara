@@ -152,6 +152,12 @@ export function MultiplayerProvider({ children }: { children: React.ReactNode })
         opponentSecretCharId,
         localCardStates,
       )
+      // Palpite errado: o servidor restaura as cartas; espelha localmente
+      if (characterId !== opponentSecretCharId) {
+        setLocalCardStates(prev =>
+          Object.fromEntries(Object.keys(prev).map(id => [id, 'active' as const])),
+        )
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erro ao fazer chute.')
       throw err
