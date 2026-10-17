@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useGame } from '@/context/GameContext'
+import BackButton from '@/components/BackButton'
 
 // ── Avatar options ─────────────────────────────────────────────────────────────
 
@@ -41,6 +42,8 @@ export default function AvatarSelection() {
         fontFamily: 'Lexend, sans-serif',
       }}
     >
+      <BackButton onClick={() => navigate('/')} />
+
       <h1 style={{ fontSize: 'var(--font-size-heading, 32px)', textAlign: 'center' }}>
         Escolha seu Avatar
       </h1>

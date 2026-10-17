@@ -79,6 +79,32 @@ describe('PhaseMap', () => {
     expect(disabledButtons.length).toBeGreaterThanOrEqual(3)
   })
 
+  it('Phase 2 libera ao concluir a Fase 1 → navigate to /game/2', async () => {
+    mockCompletedPhases = [1]
+    const user = userEvent.setup()
+    renderPhaseMap()
+
+    await user.click(screen.getByRole('button', { name: /fase 2/i }))
+
+    expect(mockNavigate).toHaveBeenCalledWith('/game/2')
+  })
+
+  it('Phase 3 continua bloqueada se só a Fase 1 foi concluída', () => {
+    mockCompletedPhases = [1]
+    renderPhaseMap()
+
+    expect(screen.getByRole('button', { name: /fase 3/i })).toHaveAttribute('aria-disabled', 'true')
+  })
+
+  it('botão Voltar → navigate to /', async () => {
+    const user = userEvent.setup()
+    renderPhaseMap()
+
+    await user.click(screen.getByRole('button', { name: /voltar/i }))
+
+    expect(mockNavigate).toHaveBeenCalledWith('/')
+  })
+
   it('when completedPhases=[1] → shows "Concluída" badge on Phase 1', () => {
     mockCompletedPhases = [1]
     renderPhaseMap()

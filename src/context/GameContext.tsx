@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react'
 import type { GameState, GameAction } from '@/types'
 import { characters } from '@/data/characters'
-import { phase1Questions } from '@/data/questions'
+import { allQuestions } from '@/data/questions'
 
 // ── Initial State ─────────────────────────────────────────────────────────────
 
@@ -29,9 +29,7 @@ function getPhaseCharacters(phase: number) {
 // ── Helper: compute answer for a question ────────────────────────────────────
 
 function computeAnswer(secretCharacterId: string, questionId: string): boolean | null {
-  // Try phase1Questions first, then all questions
-  const question =
-    phase1Questions.find(q => q.id === questionId)
+  const question = allQuestions.find(q => q.id === questionId)
 
   if (!question) return null
 

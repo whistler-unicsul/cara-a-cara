@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useGame } from '@/context/GameContext'
+import BackButton from '@/components/BackButton'
 
 // ── Phase data ────────────────────────────────────────────────────────────────
 
@@ -30,6 +31,10 @@ export default function PhaseMap() {
         fontFamily: 'Lexend, sans-serif',
       }}
     >
+      <div style={{ width: '100%', maxWidth: '480px', display: 'flex' }}>
+        <BackButton onClick={() => navigate('/')} />
+      </div>
+
       <h1 style={{ fontSize: 'var(--font-size-heading, 32px)', textAlign: 'center' }}>
         Mapa de Fases
       </h1>
@@ -51,13 +56,14 @@ export default function PhaseMap() {
       >
         {PHASES.map(({ phase, title, subtitle }) => {
           const isCompleted = completedPhases.includes(phase)
-          const isPhase1 = phase === 1
+          // Fase 1 sempre liberada; as demais abrem ao concluir a fase anterior
+          const isUnlocked = phase === 1 || completedPhases.includes(phase - 1)
 
-          if (isPhase1) {
+          if (isUnlocked) {
             return (
               <button
                 key={phase}
-                onClick={() => navigate('/game/1')}
+                onClick={() => navigate(`/game/${phase}`)}
                 style={{
                   minHeight: '80px',
                   padding: '16px 24px',

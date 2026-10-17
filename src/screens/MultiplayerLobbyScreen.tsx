@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMultiplayer } from '@/context/MultiplayerContext'
+import BackButton from '@/components/BackButton'
 
 // ── MultiplayerLobbyScreen ────────────────────────────────────────────────────
 
@@ -33,6 +34,8 @@ export default function MultiplayerLobbyScreen() {
         padding: '16px',
       }}
     >
+      <BackButton onClick={() => navigate('/')} />
+
       <h1
         style={{
           fontSize: 'var(--font-size-heading, 32px)',
