@@ -7,7 +7,8 @@ import CharacterGrid from '@/components/CharacterGrid'
 import QuestionPanel from '@/components/QuestionPanel'
 import CelebrationOverlay from '@/components/CelebrationOverlay'
 import EducationalCard from '@/components/EducationalCard'
-import { phase1Questions } from '@/data/questions'
+import { getQuestionsForPhase } from '@/data/questions'
+import BackButton from '@/components/BackButton'
 
 // ── GameScreen ────────────────────────────────────────────────────────────────
 
@@ -41,7 +42,7 @@ export default function GameScreen() {
 
   // Derive phase characters and questions
   const phaseCharacters = characters.filter((c) => c.phase === phaseNumber)
-  const phaseQuestions = phaseNumber === 1 ? phase1Questions : []
+  const phaseQuestions = getQuestionsForPhase(phaseNumber)
 
   // Derive active ids from cardStates
   const activeIds = Object.entries(cardStates)
@@ -100,6 +101,8 @@ export default function GameScreen() {
 
   return (
     <div style={screenStyle}>
+      <BackButton onClick={() => navigate('/phases')} />
+
       {/* Character grid */}
       <CharacterGrid
         characters={phaseCharacters}

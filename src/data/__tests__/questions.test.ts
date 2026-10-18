@@ -127,3 +127,52 @@ describe('Phase 1 Question Bank — integridade dos dados', () => {
     expect(q!.answers['potira']).toBe(true)
   })
 })
+
+// ── Fases 2–5 ─────────────────────────────────────────────────────────────────
+
+import { getQuestionsForPhase, allQuestions } from '../questions'
+import { characters } from '../characters'
+
+describe.each([2, 3, 4, 5])('Fase %i — banco de perguntas', (phase) => {
+  const questions = getQuestionsForPhase(phase)
+  const ids = characters.filter(c => c.phase === phase).map(c => c.id)
+
+  it('tem pelo menos 8 perguntas com id único e phaseIds correto', () => {
+    expect(questions.length).toBeGreaterThanOrEqual(8)
+    expect(new Set(questions.map(q => q.id)).size).toBe(questions.length)
+    for (const q of questions) expect(q.phaseIds).toContain(phase)
+  })
+
+  it('responde (boolean) para todos os personagens da fase', () => {
+    expect(ids.length).toBe(6)
+    for (const q of questions) {
+      for (const id of ids) {
+        expect(typeof q.answers[id], `${q.id} → ${id}`).toBe('boolean')
+      }
+    }
+  })
+
+  it('nenhuma pergunta tem a mesma resposta para todos os personagens', () => {
+    for (const q of questions) {
+      const values = ids.map(id => q.answers[id])
+      expect(values.some(Boolean) && values.some(v => !v), q.id).toBe(true)
+    }
+  })
+
+  it('cada personagem pode ser identificado de forma única pelas respostas', () => {
+    const signatures = ids.map(id => questions.map(q => (q.answers[id] ? 1 : 0)).join(''))
+    expect(new Set(signatures).size).toBe(ids.length)
+  })
+})
+
+describe('allQuestions', () => {
+  it('reúne as perguntas de todas as fases sem ids repetidos', () => {
+    const total = [1, 2, 3, 4, 5].reduce((n, p) => n + getQuestionsForPhase(p).length, 0)
+    expect(allQuestions.length).toBe(total)
+    expect(new Set(allQuestions.map(q => q.id)).size).toBe(total)
+  })
+
+  it('retorna lista vazia para fase inexistente', () => {
+    expect(getQuestionsForPhase(99)).toEqual([])
+  })
+})

@@ -78,14 +78,19 @@ src/
 └── types/        # Interfaces TypeScript
 ```
 
-## Fases do jogo (MVP)
+## Fases do jogo
 
-| Fase | Personagens |
-|---|---|
-| Fase 1 *(MVP)* | Aiê, Kojo, Zumbi, Amara |
-| Fase 2 | Mariana, Giuseppe, Heinrich, Elena, Bora, Boris |
-| Fase 3 | Karim, Fatima, Yumi, Chen, Dae-Ho |
-| Fase 4 | Pedro + todos anteriores |
+Cada fase libera a seguinte ao ser concluída (a Fase 1 começa liberada).
+
+| Fase | Tema | Personagens |
+|---|---|---|
+| Fase 1 | Povos originários | Aiê, Yara, Cauã, Tainá, Iara, Potira |
+| Fase 2 | África e Portugal | Kojo, Amara, Zumbi, Babatunde, Kofi, Maria |
+| Fase 3 | Imigração europeia | Sofia, Greta, Carmen, Zofia, Olena, Natasha |
+| Fase 4 | Ásia e Oriente Médio | Hana, Mei, Habib, Fatima, Jiho, Ara |
+| Fase 5 | Brasil de todos (extra) | Samuel, Pieter, Helene, Zara, Dilnoza, Amaru |
+
+O modo multijogador usa apenas a Fase 1.
 
 ## Acessibilidade
 

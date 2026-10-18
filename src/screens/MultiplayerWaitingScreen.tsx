@@ -1,12 +1,18 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMultiplayer } from '@/context/MultiplayerContext'
+import BackButton from '@/components/BackButton'
 
 // ── MultiplayerWaitingScreen ──────────────────────────────────────────────────
 
 export default function MultiplayerWaitingScreen() {
   const navigate = useNavigate()
-  const { room, myRole, startGame } = useMultiplayer()
+  const { room, myRole, startGame, leaveRoom } = useMultiplayer()
+
+  function handleBack() {
+    leaveRoom?.()
+    navigate('/multiplayer')
+  }
 
   // Navigate to game when status changes to 'playing'
   useEffect(() => {
@@ -26,6 +32,7 @@ export default function MultiplayerWaitingScreen() {
           minHeight: '100vh',
         }}
       >
+        <BackButton onClick={handleBack} />
         <p>Carregando…</p>
       </main>
     )
@@ -45,6 +52,8 @@ export default function MultiplayerWaitingScreen() {
         padding: '16px',
       }}
     >
+      <BackButton onClick={handleBack} />
+
       {myRole === 'host' ? (
         <>
           <p
