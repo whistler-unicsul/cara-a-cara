@@ -4,11 +4,11 @@ import { characters } from '@/data/characters'
 // ── Phase 1 Question Bank ─────────────────────────────────────────────────────
 //
 // Personagens da Fase 1: aie (Tupi), yara (Guarani), caua (Xavante),
-//                        taina (Kayapó), iara (Yanomami), potira (Pataxó)
+//                        taina (Kayapó), lara (Yanomami), potira (Pataxó)
 //
 // Matriz de respostas (true = sim, false = não):
 //
-// Pergunta                         | aie | yara | caua | taina | iara | potira
+// Pergunta                         | aie | yara | caua | taina | lara | potira
 // ---------------------------------|-----|------|------|-------|------|-------
 // Usa cocar?                       |  T  |  F   |  T   |   F   |  F   |   F
 // É pescador/pescadora?            |  T  |  F   |  F   |   F   |  F   |   F
@@ -35,7 +35,7 @@ export const phase1Questions: Question[] = [
       yara: false,
       caua: true,
       taina: false,
-      iara: false,
+      lara: false,
       potira: false,
     },
   },
@@ -50,7 +50,7 @@ export const phase1Questions: Question[] = [
       yara: false,
       caua: false,
       taina: false,
-      iara: false,
+      lara: false,
       potira: false,
     },
   },
@@ -65,7 +65,7 @@ export const phase1Questions: Question[] = [
       yara: false,
       caua: true,
       taina: false,
-      iara: false,
+      lara: false,
       potira: false,
     },
   },
@@ -80,7 +80,7 @@ export const phase1Questions: Question[] = [
       yara: true,
       caua: false,
       taina: false,
-      iara: false,
+      lara: false,
       potira: true,
     },
   },
@@ -95,7 +95,7 @@ export const phase1Questions: Question[] = [
       yara: true,
       caua: false,
       taina: false,
-      iara: true,
+      lara: true,
       potira: true,
     },
   },
@@ -110,7 +110,7 @@ export const phase1Questions: Question[] = [
       yara: true,
       caua: false,
       taina: false,
-      iara: false,
+      lara: false,
       potira: false,
     },
   },
@@ -125,7 +125,7 @@ export const phase1Questions: Question[] = [
       yara: true,
       caua: false,
       taina: false,
-      iara: true,
+      lara: true,
       potira: false,
     },
   },
@@ -140,7 +140,7 @@ export const phase1Questions: Question[] = [
       yara: false,
       caua: true,
       taina: false,
-      iara: false,
+      lara: false,
       potira: false,
     },
   },
@@ -155,7 +155,7 @@ export const phase1Questions: Question[] = [
       yara: false,
       caua: false,
       taina: true,
-      iara: false,
+      lara: false,
       potira: false,
     },
   },
@@ -170,7 +170,7 @@ export const phase1Questions: Question[] = [
       yara: false,
       caua: false,
       taina: true,
-      iara: false,
+      lara: false,
       potira: false,
     },
   },
@@ -185,7 +185,7 @@ export const phase1Questions: Question[] = [
       yara: false,
       caua: false,
       taina: false,
-      iara: true,
+      lara: true,
       potira: false,
     },
   },
@@ -200,7 +200,7 @@ export const phase1Questions: Question[] = [
       yara: true,
       caua: false,
       taina: false,
-      iara: false,
+      lara: false,
       potira: true,
     },
   },

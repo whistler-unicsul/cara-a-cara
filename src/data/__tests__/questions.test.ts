@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { phase1Questions } from '../questions'
 
-const PHASE1_CHARACTER_IDS = ['aie', 'yara', 'caua', 'taina', 'iara', 'potira'] as const
+const PHASE1_CHARACTER_IDS = ['aie', 'yara', 'caua', 'taina', 'lara', 'potira'] as const
 
 describe('Phase 1 Question Bank — integridade dos dados', () => {
   it('deve ter pelo menos 8 perguntas', () => {
@@ -52,9 +52,9 @@ describe('Phase 1 Question Bank — integridade dos dados', () => {
     }
   })
 
-  it('iara (Yanomami) deve ter respostas bem definidas em todas as perguntas', () => {
+  it('lara (Yanomami) deve ter respostas bem definidas em todas as perguntas', () => {
     for (const question of phase1Questions) {
-      expect(question.answers['iara']).not.toBeUndefined()
+      expect(question.answers['lara']).not.toBeUndefined()
     }
   })
 
@@ -115,10 +115,10 @@ describe('Phase 1 Question Bank — integridade dos dados', () => {
     expect(q!.answers['caua']).toBe(true)
   })
 
-  it('iara deve tecer cestos (q-cesto: true)', () => {
+  it('lara deve tecer cestos (q-cesto: true)', () => {
     const q = phase1Questions.find(q => q.id === 'q-cesto')
     expect(q).toBeDefined()
-    expect(q!.answers['iara']).toBe(true)
+    expect(q!.answers['lara']).toBe(true)
   })
 
   it('potira deve fazer colares de miçangas (q-micanga: true)', () => {

@@ -55,7 +55,7 @@ export default function EducationalCard({ character, onNext }: EducationalCardPr
 
       {/* Character image */}
       <img
-        src={character.imagePath}
+        src={`/${character.imagePath}`}
         alt={character.name}
         style={{
           width: '180px',

@@ -56,7 +56,7 @@ export default function CharacterCard({
       }}
     >
       <img
-        src={character.imagePath}
+        src={`/${character.imagePath}`}
         alt={character.name}
         style={{ width: '100%', height: 'auto', borderRadius: 'var(--radius-sm)' }}
       />

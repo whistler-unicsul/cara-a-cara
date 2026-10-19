@@ -131,20 +131,20 @@ const TAINA: Character = {
 }
 
 const IARA: Character = {
-  id: 'iara',
-  name: 'Iara',
+  id: 'lara',
+  name: 'Lara',
   phase: 1,
   origin: 'Povos Yanomami, Roraima',
   originFact:
-    'Iara vive nas serras de Roraima e do Amazonas com os Yanomami, um dos maiores povos indígenas isolados da Amazônia. Vivem em grandes casas comunitárias circulares chamadas xapono.',
+    'Lara vive nas serras de Roraima e do Amazonas com os Yanomami, um dos maiores povos indígenas isolados da Amazônia. Vivem em grandes casas comunitárias circulares chamadas xapono.',
   culturalFact:
     'Os Yanomami possuem profundo conhecimento sobre plantas da floresta e desenvolveram uma comunicação com os espíritos da natureza por meio do xamanismo. São símbolo de resistência à garimpagem ilegal.',
   traje: 'Saias de folhas, fios de algodão no nariz e orelhas e pintura vermelha de urucum pelo corpo',
   profissao: 'Coletora e xamã aprendiz',
   itemCultural: 'Cesto trançado',
   comidaTipica: 'Banana assada com mel silvestre',
-  imagePath: 'assets/characters/iara.png',
-  audioPath: 'assets/audio/characters/iara-narration.mp3',
+  imagePath: 'assets/characters/lara.png',
+  audioPath: 'assets/audio/characters/lara-narration.mp3',
   itemIconPath: 'assets/icons/items/cesto.svg',
   attributes: {
     usaCocar: false,
