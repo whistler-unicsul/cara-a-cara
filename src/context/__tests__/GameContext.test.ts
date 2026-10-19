@@ -60,7 +60,7 @@ function makePlayingState(secretCharacterId: string): GameState {
       yara: 'active',
       caua: 'active',
       taina: 'active',
-      iara: 'active',
+      lara: 'active',
       potira: 'active',
     },
     askedQuestionIds: [],
@@ -74,7 +74,7 @@ describe('GameReducer', () => {
   // START_GAME
   describe('START_GAME', () => {
     it('selects one of the 6 Phase 1 characters as secretCharacterId', () => {
-      const validIds = ['aie', 'yara', 'caua', 'taina', 'iara', 'potira']
+      const validIds = ['aie', 'yara', 'caua', 'taina', 'lara', 'potira']
       const results = new Set<string>()
 
       // Run multiple times to check randomness coverage
@@ -95,7 +95,7 @@ describe('GameReducer', () => {
         yara: 'active',
         caua: 'active',
         taina: 'active',
-        iara: 'active',
+        lara: 'active',
         potira: 'active',
       })
     })
@@ -178,7 +178,7 @@ describe('GameReducer', () => {
     })
 
     it('accumulates multiple questions in askedQuestionIds', () => {
-      const state = makePlayingState('iara')
+      const state = makePlayingState('lara')
       const s1 = GameReducer(state, { type: 'ASK_QUESTION', questionId: 'q-cocar' })
       const s2 = GameReducer(s1, { type: 'ASK_QUESTION', questionId: 'q-pescador' })
       expect(s2.askedQuestionIds).toEqual(['q-cocar', 'q-pescador'])
@@ -207,7 +207,7 @@ describe('GameReducer', () => {
           yara: 'active',
           caua: 'eliminated',
           taina: 'active',
-          iara: 'eliminated',
+          lara: 'eliminated',
           potira: 'active',
         },
       }
@@ -217,7 +217,7 @@ describe('GameReducer', () => {
         yara: 'active',
         caua: 'active',
         taina: 'active',
-        iara: 'active',
+        lara: 'active',
         potira: 'active',
       })
     })
@@ -233,7 +233,7 @@ describe('GameReducer', () => {
           yara: 'active',
           caua: 'eliminated',
           taina: 'eliminated',
-          iara: 'eliminated',
+          lara: 'eliminated',
           potira: 'active',
         },
       }
@@ -243,13 +243,13 @@ describe('GameReducer', () => {
         yara: 'active',
         caua: 'active',
         taina: 'active',
-        iara: 'active',
+        lara: 'active',
         potira: 'active',
       })
     })
 
     it('does NOT change the screen (stays PLAYING)', () => {
-      const state = makePlayingState('iara')
+      const state = makePlayingState('lara')
       const next = GameReducer(state, { type: 'WRONG_GUESS' })
       expect(next.screen).toBe('PLAYING')
     })

@@ -40,7 +40,7 @@ function makeDefaultState() {
       yara: 'active' as const,
       caua: 'active' as const,
       taina: 'active' as const,
-      iara: 'active' as const,
+      lara: 'active' as const,
       potira: 'active' as const,
     },
     askedQuestionIds: [] as string[],
@@ -105,7 +105,7 @@ describe('GameScreen', () => {
 
   it('renders 6 character cards', () => {
     renderGameScreen()
-    const cards = screen.getAllByRole('button', { name: /aiê|yara|cauã|tainá|iara|potira/i })
+    const cards = screen.getAllByRole('button', { name: /aiê|yara|cauã|tainá|lara|potira/i })
     expect(cards).toHaveLength(6)
   })
 
@@ -156,7 +156,7 @@ describe('GameScreen', () => {
         yara: 'eliminated',
         caua: 'eliminated',
         taina: 'eliminated',
-        iara: 'eliminated',
+        lara: 'eliminated',
         potira: 'eliminated',
       },
     }

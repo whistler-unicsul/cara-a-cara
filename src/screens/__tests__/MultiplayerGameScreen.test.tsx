@@ -31,7 +31,7 @@ let mockMyCardStates: Record<string, 'active' | 'eliminated'> = {
   yara: 'active',
   caua: 'active',
   taina: 'active',
-  iara: 'active',
+  lara: 'active',
   potira: 'active',
 }
 let mockMyAskedQuestionIds: string[] = []
@@ -90,8 +90,8 @@ function makeRoom(overrides: Partial<MultiplayerRoom> = {}): MultiplayerRoom {
     host_secret_char_id: 'aie',
     guest_secret_char_id: 'yara',
     current_turn: 'host',
-    host_card_states: { aie: 'active', yara: 'active', caua: 'active', taina: 'active', iara: 'active', potira: 'active' },
-    guest_card_states: { aie: 'active', yara: 'active', caua: 'active', taina: 'active', iara: 'active', potira: 'active' },
+    host_card_states: { aie: 'active', yara: 'active', caua: 'active', taina: 'active', lara: 'active', potira: 'active' },
+    guest_card_states: { aie: 'active', yara: 'active', caua: 'active', taina: 'active', lara: 'active', potira: 'active' },
     host_asked_q_ids: [],
     guest_asked_q_ids: [],
     last_question_id: null,
@@ -134,7 +134,7 @@ describe('MultiplayerGameScreen', () => {
   it('renderiza 6 cartas e ≥ 8 perguntas', () => {
     renderGameScreen()
 
-    const cards = screen.getAllByRole('button', { name: /aiê|yara|cauã|tainá|iara|potira/i })
+    const cards = screen.getAllByRole('button', { name: /aiê|yara|cauã|tainá|lara|potira/i })
     expect(cards).toHaveLength(6)
 
     const allButtons = screen.getAllByRole('button')
@@ -185,7 +185,7 @@ describe('MultiplayerGameScreen', () => {
       yara: 'eliminated',
       caua: 'eliminated',
       taina: 'eliminated',
-      iara: 'eliminated',
+      lara: 'eliminated',
       potira: 'eliminated',
     }
     renderGameScreen()
