@@ -132,7 +132,7 @@ export default function MultiplayerGameScreen() {
           role="alert"
           style={{
             backgroundColor: 'var(--color-error, #f44)',
-            color: '#fff',
+            color: 'var(--color-on-error, #fff)',
             padding: '12px',
             borderRadius: '8px',
             textAlign: 'center',

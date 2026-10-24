@@ -125,7 +125,7 @@ export default function AvatarSelection() {
           fontSize: 'var(--font-size-button, 24px)',
           fontFamily: 'Lexend, sans-serif',
           background: 'var(--color-primary, #6c3d91)',
-          color: '#fff',
+          color: 'var(--color-on-primary, #fff)',
           border: 'none',
           borderRadius: '8px',
           cursor: 'pointer',
