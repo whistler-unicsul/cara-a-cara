@@ -98,7 +98,7 @@ export default function EducationalCard({ character, onNext }: EducationalCardPr
         onClick={onNext}
         style={{
           backgroundColor: 'var(--color-primary)',
-          color: '#fff',
+          color: 'var(--color-on-primary, #fff)',
           borderRadius: 'var(--radius-md)',
           padding: 'var(--space-sm) var(--space-lg)',
           fontWeight: 700,
