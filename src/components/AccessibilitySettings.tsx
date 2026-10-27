@@ -127,7 +127,7 @@ export default function AccessibilitySettings({ isOpen, onClose, triggerRef }: A
   const closeButtonStyle: React.CSSProperties = {
     alignSelf: 'flex-end',
     backgroundColor: 'var(--color-primary)',
-    color: '#fff',
+    color: 'var(--color-on-primary, #fff)',
     borderRadius: 'var(--radius-md)',
     padding: 'var(--space-xs) var(--space-md)',
     fontWeight: 700,
