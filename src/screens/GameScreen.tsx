@@ -22,23 +22,24 @@ export default function GameScreen() {
     avatar,
     cardStates,
     askedQuestionIds,
+    questionAnswers,
     lastAnswer,
     encouragement,
     secretCharacterId,
+    completedPhases,
     dispatch,
   } = useGame()
 
   const phaseNumber = Number(phase) || 1
 
-  // Start game on mount; CAC-39: redirect if no active session (page reload)
+  // Reinicia o jogo sempre que a fase mudar (cobre mount e troca via Seguinte)
   useEffect(() => {
     if (!avatar) {
       navigate('/phases')
       return
     }
     dispatch({ type: 'START_GAME', phase: phaseNumber })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [phaseNumber, avatar, dispatch, navigate])
 
   // Derive phase characters and questions
   const phaseCharacters = characters.filter((c) => c.phase === phaseNumber)
@@ -50,8 +51,9 @@ export default function GameScreen() {
     .map(([id]) => id)
 
   // CAC-40: recycle question list when all questions have been asked
-  const effectiveAskedIds =
-    askedQuestionIds.length >= phaseQuestions.length ? [] : askedQuestionIds
+  const recycled = askedQuestionIds.length >= phaseQuestions.length
+  const effectiveAskedIds = recycled ? [] : askedQuestionIds
+  const effectiveQuestionAnswers = recycled ? {} : questionAnswers
 
   // Secret character (for EducationalCard)
   const secretCharacter = secretCharacterId
@@ -101,7 +103,12 @@ export default function GameScreen() {
 
   return (
     <div style={screenStyle}>
-      <BackButton onClick={() => navigate('/phases')} />
+      <BackButton
+        onBack={() => navigate('/phases')}
+        onHome={() => navigate('/')}
+        onNext={phaseNumber < 5 ? () => navigate(`/game/${phaseNumber + 1}`) : undefined}
+        nextEnabled={completedPhases.includes(phaseNumber) && phaseNumber < 5}
+      />
 
       {/* Character grid */}
       <CharacterGrid
@@ -130,7 +137,9 @@ export default function GameScreen() {
       <QuestionPanel
         questions={phaseQuestions}
         askedIds={effectiveAskedIds}
+        questionAnswers={effectiveQuestionAnswers}
         lastAnswer={lastAnswer}
+        questionCount={askedQuestionIds.length}
         onAsk={handleAsk}
       />
 

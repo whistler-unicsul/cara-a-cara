@@ -7,7 +7,7 @@
 // - onError(handler) registra callback para evento 'error'
 // - isPlaying getter
 
-const AUDIO_TIMEOUT_MS = 3000
+const LOAD_TIMEOUT_MS = 3000
 
 export class AudioManager {
   private _currentAudio: HTMLAudioElement | null = null
@@ -41,11 +41,14 @@ export class AudioManager {
         this._currentAudio = null
       }
 
+      // Timeout only covers the load/start phase — cleared once audio begins playing
       const timeoutId = setTimeout(() => {
         cleanup()
         audio.pause()
-        reject(new Error(`Audio timeout after ${AUDIO_TIMEOUT_MS}ms: ${audioPath}`))
-      }, AUDIO_TIMEOUT_MS)
+        reject(new Error(`Audio load timeout after ${LOAD_TIMEOUT_MS}ms: ${audioPath}`))
+      }, LOAD_TIMEOUT_MS)
+
+      audio.addEventListener('playing', () => clearTimeout(timeoutId))
 
       audio.addEventListener('ended', () => {
         clearTimeout(timeoutId)

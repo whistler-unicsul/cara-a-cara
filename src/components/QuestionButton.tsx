@@ -6,10 +6,11 @@ import type { Question } from '@/types'
 interface QuestionButtonProps {
   question: Question
   disabled?: boolean
+  answer?: boolean | null
   onClick: () => void
 }
 
-export default function QuestionButton({ question, disabled = false, onClick }: QuestionButtonProps) {
+export default function QuestionButton({ question, disabled = false, answer, onClick }: QuestionButtonProps) {
   const { play, isPlaying } = useAudio()
 
   async function handleClick() {
@@ -20,6 +21,22 @@ export default function QuestionButton({ question, disabled = false, onClick }: 
     onClick()
   }
 
+  const bgColor = answer === true
+    ? 'var(--color-success-bg)'
+    : answer === false
+      ? 'var(--color-error-bg)'
+      : disabled ? 'var(--color-border)' : 'var(--color-surface)'
+
+  const borderColor = answer === true
+    ? 'var(--color-success)'
+    : answer === false
+      ? 'var(--color-error)'
+      : 'var(--color-border)'
+
+  const textColor = answer != null
+    ? 'var(--color-text)'
+    : disabled ? 'var(--color-text-muted)' : 'var(--color-text)'
+
   const buttonStyle = {
     display: 'flex',
     alignItems: 'center',
@@ -28,9 +45,9 @@ export default function QuestionButton({ question, disabled = false, onClick }: 
     textAlign: 'left' as const,
     padding: 'var(--space-sm) var(--space-md)',
     borderRadius: 'var(--radius-sm)',
-    border: '2px solid var(--color-border)',
-    backgroundColor: disabled ? 'var(--color-border)' : 'var(--color-surface)',
-    color: disabled ? 'var(--color-text-muted)' : 'var(--color-text)',
+    border: `2px solid ${borderColor}`,
+    backgroundColor: bgColor,
+    color: textColor,
     minHeight: '44px',
     minWidth: '44px',
     pointerEvents: disabled ? ('none' as const) : ('auto' as const),

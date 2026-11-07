@@ -19,15 +19,18 @@ export default function MenuScreen() {
   }
 
   return (
-    <main className="menu-screen" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', gap: '24px' }}>
-      <h1 style={{ fontSize: 'var(--font-size-heading, 32px)', fontFamily: 'Lexend, sans-serif', textAlign: 'center' }}>
-        Cara a Cara Brasil
-      </h1>
+    <main className="menu-screen">
+      <h1 className="sr-only">Cara a Cara Brasil</h1>
 
-      <nav style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%', maxWidth: '320px' }}>
+      <img
+        src="/banner.gif"
+        alt="Cara a Cara do Brasil — personagens coloridos do jogo"
+        className="menu-banner"
+      />
+
+      <nav className="menu-nav">
         <button
-          className="menu-btn"
-          style={{ minHeight: '44px', fontSize: 'var(--font-size-button, 24px)', fontFamily: 'Lexend, sans-serif', padding: '12px 24px' }}
+          className="menu-btn menu-btn--start"
           onClick={() => navigate('/avatar')}
           onFocus={() => handleButtonFocus('assets/audio/ui/btn-iniciar-jogo.mp3')}
           onMouseEnter={() => handleButtonFocus('assets/audio/ui/btn-iniciar-jogo.mp3')}
@@ -36,8 +39,7 @@ export default function MenuScreen() {
         </button>
 
         <button
-          className="menu-btn"
-          style={{ minHeight: '44px', fontSize: 'var(--font-size-button, 24px)', fontFamily: 'Lexend, sans-serif', padding: '12px 24px' }}
+          className="menu-btn menu-btn--instructions"
           onClick={() => setShowInstructions(true)}
           onFocus={() => handleButtonFocus('assets/audio/ui/btn-instrucoes.mp3')}
           onMouseEnter={() => handleButtonFocus('assets/audio/ui/btn-instrucoes.mp3')}
@@ -46,8 +48,7 @@ export default function MenuScreen() {
         </button>
 
         <button
-          className="menu-btn"
-          style={{ minHeight: '44px', fontSize: 'var(--font-size-button, 24px)', fontFamily: 'Lexend, sans-serif', padding: '12px 24px' }}
+          className="menu-btn menu-btn--multiplayer"
           onClick={() => navigate('/multiplayer')}
           onFocus={() => handleButtonFocus('assets/audio/ui/btn-multijogador.mp3')}
           onMouseEnter={() => handleButtonFocus('assets/audio/ui/btn-multijogador.mp3')}
@@ -57,8 +58,7 @@ export default function MenuScreen() {
 
         <button
           ref={settingsTriggerRef}
-          className="menu-btn"
-          style={{ minHeight: '44px', fontSize: 'var(--font-size-button, 24px)', fontFamily: 'Lexend, sans-serif', padding: '12px 24px' }}
+          className="menu-btn menu-btn--settings"
           onClick={() => setShowSettings(true)}
           onFocus={() => handleButtonFocus('assets/audio/ui/btn-configuracoes.mp3')}
           onMouseEnter={() => handleButtonFocus('assets/audio/ui/btn-configuracoes.mp3')}

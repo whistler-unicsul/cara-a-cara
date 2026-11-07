@@ -89,7 +89,7 @@ describe('AudioManager — play()', () => {
     // Avança 3001ms para acionar o timeout interno
     vi.advanceTimersByTime(3001)
 
-    await expect(playPromise).rejects.toThrow('Audio timeout after 3000ms')
+    await expect(playPromise).rejects.toThrow('Audio load timeout after 3000ms')
   })
 
   it('isPlaying retorna true durante reprodução e false após ended', async () => {

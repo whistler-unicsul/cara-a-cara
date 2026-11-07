@@ -64,7 +64,7 @@ describe('EducationalCard', () => {
 
   it('calls play on mount with character audioPath', () => {
     render(<EducationalCard character={mockCharacter} onNext={vi.fn()} />)
-    expect(mockPlay).toHaveBeenCalledWith('assets/audio/characters/aie-narration.mp3')
+    expect(mockPlay).toHaveBeenCalledWith('/assets/audio/characters/aie-narration.mp3')
   })
 
   it('shows muted speaker icon when play rejects', async () => {

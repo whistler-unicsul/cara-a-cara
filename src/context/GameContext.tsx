@@ -15,6 +15,7 @@ export const initialState: GameState = {
   secretCharacterId: null,
   cardStates: {},
   askedQuestionIds: [],
+  questionAnswers: {},
   lastAnswer: null,
   encouragement: null,
   accessibilityHighContrast: false,
@@ -74,6 +75,7 @@ export function GameReducer(state: GameState, action: GameAction): GameState {
         secretCharacterId: secretCharacter.id,
         cardStates,
         askedQuestionIds: [],
+        questionAnswers: {},
         lastAnswer: null,
         encouragement: null,
       }
@@ -87,6 +89,9 @@ export function GameReducer(state: GameState, action: GameAction): GameState {
       return {
         ...state,
         askedQuestionIds: [...state.askedQuestionIds, action.questionId],
+        questionAnswers: answer !== null
+          ? { ...state.questionAnswers, [action.questionId]: answer }
+          : state.questionAnswers,
         lastAnswer: answer,
         encouragement: null,
       }

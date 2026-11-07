@@ -1,33 +1,69 @@
+import type { CSSProperties } from 'react'
+
 // ── BackButton ────────────────────────────────────────────────────────────────
 
 interface BackButtonProps {
-  onClick: () => void
-  label?: string
+  onBack: () => void
+  onHome?: () => void
+  onNext?: () => void
+  nextEnabled?: boolean
 }
 
-export default function BackButton({ onClick, label = 'Voltar' }: BackButtonProps) {
+export default function BackButton({ onBack, onHome, onNext, nextEnabled = false }: BackButtonProps) {
+  const base: CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    minHeight: '44px',
+    padding: '8px 20px',
+    fontSize: '16px',
+    fontFamily: 'Lexend, sans-serif',
+    fontWeight: 600,
+    lineHeight: 1,
+    borderRadius: '999px',
+    cursor: 'pointer',
+    border: '2px solid var(--color-border)',
+    background: 'var(--color-surface)',
+    color: 'var(--color-text)',
+    boxShadow: 'var(--shadow-card)',
+  }
+
+  const disabledStyle: CSSProperties = {
+    ...base,
+    opacity: 0.4,
+    cursor: 'not-allowed',
+    boxShadow: 'none',
+  }
+
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={label}
+    <div
       data-testid="back-button"
-      style={{
-        alignSelf: 'flex-start',
-        minWidth: '44px',
-        minHeight: '44px',
-        padding: '8px 16px',
-        fontSize: 'var(--font-size-button, 24px)',
-        fontFamily: 'Lexend, sans-serif',
-        lineHeight: 1,
-        background: 'transparent',
-        color: 'var(--color-primary, #6c3d91)',
-        border: '2px solid var(--color-primary, #6c3d91)',
-        borderRadius: '12px',
-        cursor: 'pointer',
-      }}
+      style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}
     >
-      <span aria-hidden="true">←</span>
-    </button>
+      <button type="button" onClick={onBack} aria-label="Voltar" style={base}>
+        <span aria-hidden="true">←</span>
+        <span>Voltar</span>
+      </button>
+
+      {onHome && (
+        <button type="button" onClick={onHome} aria-label="Início" style={base}>
+          <span aria-hidden="true">🏠</span>
+          <span>Início</span>
+        </button>
+      )}
+
+      {onNext && (
+        <button
+          type="button"
+          onClick={nextEnabled ? onNext : undefined}
+          aria-label="Seguinte"
+          aria-disabled={!nextEnabled}
+          style={nextEnabled ? base : disabledStyle}
+        >
+          <span>Seguinte</span>
+          <span aria-hidden="true">→</span>
+        </button>
+      )}
+    </div>
   )
 }

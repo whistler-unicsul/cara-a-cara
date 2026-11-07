@@ -31,8 +31,8 @@ export default function PhaseMap() {
         fontFamily: 'Lexend, sans-serif',
       }}
     >
-      <div style={{ width: '100%', maxWidth: '480px', display: 'flex' }}>
-        <BackButton onClick={() => navigate('/')} />
+      <div style={{ width: '100%', maxWidth: '480px' }}>
+        <BackButton onBack={() => navigate('/')} />
       </div>
 
       <h1 style={{ fontSize: 'var(--font-size-heading, 32px)', textAlign: 'center' }}>

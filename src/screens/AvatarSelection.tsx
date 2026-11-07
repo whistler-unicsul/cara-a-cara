@@ -42,7 +42,7 @@ export default function AvatarSelection() {
         fontFamily: 'Lexend, sans-serif',
       }}
     >
-      <BackButton onClick={() => navigate('/')} />
+      <BackButton onBack={() => navigate('/')} />
 
       <h1 style={{ fontSize: 'var(--font-size-heading, 32px)', textAlign: 'center' }}>
         Escolha seu Avatar
