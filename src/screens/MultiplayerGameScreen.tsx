@@ -185,6 +185,7 @@ export default function MultiplayerGameScreen() {
         questions={phase1Questions}
         askedIds={isMyTurn ? effectiveAskedIds : phase1Questions.map(q => q.id)}
         lastAnswer={lastAnswer}
+        questionCount={myAskedQuestionIds.length}
         onAsk={isMyTurn ? handleAsk : () => {}}
       />
 

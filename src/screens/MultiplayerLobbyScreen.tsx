@@ -13,13 +13,21 @@ export default function MultiplayerLobbyScreen() {
   const [joinCode, setJoinCode] = useState('')
 
   async function handleCreateRoom() {
-    await createRoom()
-    navigate('/multiplayer/waiting')
+    try {
+      await createRoom()
+      navigate('/multiplayer/waiting')
+    } catch {
+      // Erro já exibido via context.error
+    }
   }
 
   async function handleJoin() {
-    await joinRoom(joinCode)
-    navigate('/multiplayer/waiting')
+    try {
+      await joinRoom(joinCode)
+      navigate('/multiplayer/waiting')
+    } catch {
+      // Erro já exibido via context.error
+    }
   }
 
   return (
@@ -34,7 +42,7 @@ export default function MultiplayerLobbyScreen() {
         padding: '16px',
       }}
     >
-      <BackButton onClick={() => navigate('/')} />
+      <BackButton onBack={() => navigate('/')} />
 
       <h1
         style={{
@@ -56,26 +64,14 @@ export default function MultiplayerLobbyScreen() {
         }}
       >
         <button
-          className="menu-btn"
-          style={{
-            minHeight: '44px',
-            fontSize: 'var(--font-size-button, 24px)',
-            fontFamily: 'Lexend, sans-serif',
-            padding: '12px 24px',
-          }}
+          className="menu-btn menu-btn--start"
           onClick={handleCreateRoom}
         >
           Criar Partida
         </button>
 
         <button
-          className="menu-btn"
-          style={{
-            minHeight: '44px',
-            fontSize: 'var(--font-size-button, 24px)',
-            fontFamily: 'Lexend, sans-serif',
-            padding: '12px 24px',
-          }}
+          className="menu-btn menu-btn--multiplayer"
           onClick={() => setShowJoinInput(true)}
         >
           Entrar em Partida
@@ -112,13 +108,7 @@ export default function MultiplayerLobbyScreen() {
           />
 
           <button
-            className="menu-btn"
-            style={{
-              minHeight: '44px',
-              fontSize: 'var(--font-size-button, 24px)',
-              fontFamily: 'Lexend, sans-serif',
-              padding: '12px 24px',
-            }}
+            className="menu-btn menu-btn--instructions"
             onClick={handleJoin}
           >
             Entrar

@@ -32,7 +32,7 @@ export default function MultiplayerWaitingScreen() {
           minHeight: '100vh',
         }}
       >
-        <BackButton onClick={handleBack} />
+        <BackButton onBack={handleBack} />
         <p>Carregando…</p>
       </main>
     )
@@ -52,7 +52,7 @@ export default function MultiplayerWaitingScreen() {
         padding: '16px',
       }}
     >
-      <BackButton onClick={handleBack} />
+      <BackButton onBack={handleBack} />
 
       {myRole === 'host' ? (
         <>
@@ -89,15 +89,8 @@ export default function MultiplayerWaitingScreen() {
           </p>
 
           <button
-            className="menu-btn"
-            style={{
-              minHeight: '44px',
-              fontSize: 'var(--font-size-button, 24px)',
-              fontFamily: 'Lexend, sans-serif',
-              padding: '12px 24px',
-              opacity: hasGuest ? 1 : 0.5,
-              cursor: hasGuest ? 'pointer' : 'not-allowed',
-            }}
+            className="menu-btn menu-btn--start"
+            style={{ opacity: hasGuest ? 1 : 0.5, cursor: hasGuest ? 'pointer' : 'not-allowed' }}
             disabled={!hasGuest}
             onClick={startGame}
           >

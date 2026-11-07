@@ -42,7 +42,7 @@ describe('CharacterCard', () => {
     expect(screen.getByText('Aiê')).toBeInTheDocument()
   })
 
-  it('eliminated state has opacity 0.3 and scaleY transform', () => {
+  it('eliminated state has opacity 0.5 and grayscale filter', () => {
     const { container } = render(
       <CharacterCard
         character={mockCharacter}
@@ -51,11 +51,12 @@ describe('CharacterCard', () => {
       />,
     )
     const card = container.firstChild as HTMLElement
-    expect(card.style.opacity).toBe('0.3')
-    expect(card.style.transform).toContain('scaleY(0.05)')
+    expect(card.style.opacity).toBe('0.5')
+    const img = card.querySelector('img') as HTMLImageElement
+    expect(img.style.filter).toContain('grayscale(100%)')
   })
 
-  it('active state has opacity 1 and no collapsed transform', () => {
+  it('active state has opacity 1 and no grayscale filter', () => {
     const { container } = render(
       <CharacterCard
         character={mockCharacter}
@@ -65,7 +66,8 @@ describe('CharacterCard', () => {
     )
     const card = container.firstChild as HTMLElement
     expect(card.style.opacity).toBe('1')
-    expect(card.style.transform).toContain('scaleY(1)')
+    const img = card.querySelector('img') as HTMLImageElement
+    expect(img.style.filter).toBe('none')
   })
 
   it('tapping card calls onToggle', async () => {

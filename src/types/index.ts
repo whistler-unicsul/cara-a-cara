@@ -48,6 +48,7 @@ export interface GameState {
   secretCharacterId: string | null
   cardStates: Record<string, 'active' | 'eliminated'>
   askedQuestionIds: string[]
+  questionAnswers: Record<string, boolean>
   lastAnswer: boolean | null
   encouragement: string | null
   accessibilityHighContrast: boolean

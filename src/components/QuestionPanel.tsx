@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import type { Question } from '@/types'
 import QuestionButton from '@/components/QuestionButton'
 
@@ -6,11 +7,26 @@ import QuestionButton from '@/components/QuestionButton'
 interface QuestionPanelProps {
   questions: Question[]
   askedIds: string[]
+  questionAnswers?: Record<string, boolean>
   lastAnswer: boolean | null
+  questionCount?: number
   onAsk: (questionId: string) => void
 }
 
-export default function QuestionPanel({ questions, askedIds, lastAnswer, onAsk }: QuestionPanelProps) {
+export default function QuestionPanel({ questions, askedIds, questionAnswers = {}, lastAnswer, questionCount = 0, onAsk }: QuestionPanelProps) {
+  const [visibleAnswer, setVisibleAnswer] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    if (lastAnswer === null) {
+      setVisibleAnswer(null)
+      return
+    }
+    setVisibleAnswer(lastAnswer)
+    const timer = setTimeout(() => setVisibleAnswer(null), 2000)
+    return () => clearTimeout(timer)
+  // questionCount garante que o efeito dispara mesmo quando a resposta é repetida
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questionCount])
   const panelStyle = {
     display: 'flex',
     flexDirection: 'column' as const,
@@ -34,10 +50,10 @@ export default function QuestionPanel({ questions, askedIds, lastAnswer, onAsk }
     <div style={panelStyle}>
       {/* Answer area */}
       <div style={answerAreaStyle}>
-        {lastAnswer === true && (
+        {visibleAnswer === true && (
           <span style={{ color: 'var(--color-success)' }}>SIM ✓</span>
         )}
-        {lastAnswer === false && (
+        {visibleAnswer === false && (
           <span style={{ color: 'var(--color-error)' }}>NÃO ✗</span>
         )}
       </div>
@@ -51,6 +67,7 @@ export default function QuestionPanel({ questions, askedIds, lastAnswer, onAsk }
               key={question.id}
               question={question}
               disabled={isAsked}
+              answer={questionAnswers[question.id]}
               onClick={() => onAsk(question.id)}
             />
           )

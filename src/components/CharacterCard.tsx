@@ -28,10 +28,8 @@ export default function CharacterCard({
     minHeight: '44px',
     minWidth: '44px',
     overflow: 'hidden',
-    transition: 'opacity 0.2s ease, transform 0.3s ease',
-    opacity: isActive ? 1 : 0.3,
-    transform: isActive ? 'scaleY(1)' : 'scaleY(0.05)',
-    transformOrigin: 'top',
+    transition: 'opacity 0.2s ease',
+    opacity: isActive ? 1 : 0.5,
     padding: 'var(--space-sm)',
     display: 'flex',
     flexDirection: 'column',
@@ -58,7 +56,13 @@ export default function CharacterCard({
       <img
         src={`/${character.imagePath}`}
         alt={character.name}
-        style={{ width: '100%', height: 'auto', borderRadius: 'var(--radius-sm)' }}
+        style={{
+          width: '100%',
+          height: 'auto',
+          borderRadius: 'var(--radius-sm)',
+          filter: isActive ? 'none' : 'grayscale(100%)',
+          transition: 'filter 0.2s ease',
+        }}
       />
       <span style={{ fontWeight: 600, fontSize: 'var(--font-size-small)' }}>
         {character.name}

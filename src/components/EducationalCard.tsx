@@ -16,7 +16,7 @@ export default function EducationalCard({ character, onNext }: EducationalCardPr
   useEffect(() => {
     let cancelled = false
 
-    play(character.audioPath).catch(() => {
+    play(`/${character.audioPath}`).catch(() => {
       if (!cancelled) {
         setAudioFailed(true)
       }
@@ -69,19 +69,6 @@ export default function EducationalCard({ character, onNext }: EducationalCardPr
       <h2 style={{ fontWeight: 700, fontSize: 'var(--font-size-heading)' }}>
         {character.name}
       </h2>
-
-      {/* Item icon */}
-      <div style={{ fontSize: '2rem' }}>
-        {character.itemIconPath ? (
-          <img
-            src={character.itemIconPath}
-            alt={character.itemCultural}
-            style={{ width: '48px', height: '48px' }}
-          />
-        ) : (
-          <span aria-label={character.itemCultural}>🎭</span>
-        )}
-      </div>
 
       {/* Origin fact */}
       <p style={{ textAlign: 'center', color: 'var(--color-text)' }}>
